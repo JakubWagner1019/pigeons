@@ -7,6 +7,7 @@
 </head>
 <body>
 <div id="main">
+    <a th:href="@{/pigeon}">Go back</a>
     <div id="pigeon_tree">
         <div id="pigeon">
             <div th:insert="templates :: pigeonDetail(${pigeon?.id},${pigeon?.description})"></div>
