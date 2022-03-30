@@ -5,6 +5,7 @@
     <title th:text="${'Creating' + (pigeonDto.gender==1 ?'father':'mother') + 'for' + childId}"></title>
 </head>
 <body>
+<a th:href="@{/pigeon/{id}(id=${childId})}">Go back</a>
 <p th:text="${pigeonDto.gender}"></p>
 <form th:action="@{/pigeon/{childId}/createParent(childId=${childId})}" th:object="${pigeonDto}" method="post">
     <input type="text" th:field="*{id}">
