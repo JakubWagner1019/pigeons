@@ -1,13 +1,13 @@
-package com.example.authorizationtest;
+package jakwagne.pigeonapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AuthorizationTestApplication {
+public class PigeonApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(AuthorizationTestApplication.class, args);
+        SpringApplication.run(PigeonApplication.class, args);
     }
 
 }

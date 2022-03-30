@@ -1,4 +1,4 @@
-package com.example.authorizationtest;
+package jakwagne.pigeonapp;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

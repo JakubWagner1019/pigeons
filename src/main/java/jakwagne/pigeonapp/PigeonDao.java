@@ -1,4 +1,4 @@
-package com.example.authorizationtest;
+package jakwagne.pigeonapp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

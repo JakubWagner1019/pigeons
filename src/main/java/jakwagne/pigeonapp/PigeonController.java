@@ -1,4 +1,4 @@
-package com.example.authorizationtest;
+package jakwagne.pigeonapp;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

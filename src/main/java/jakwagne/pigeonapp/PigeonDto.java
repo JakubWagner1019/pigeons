@@ -1,4 +1,4 @@
-package com.example.authorizationtest;
+package jakwagne.pigeonapp;
 
 public record PigeonDto(String id,
                         String description,
