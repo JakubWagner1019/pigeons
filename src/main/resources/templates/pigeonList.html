@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Pigeon List</title>
+</head>
+<body>
+<form th:action="@{/pigeon}" th:object="${pigeonDto}" method="post">
+    <input type="text" th:field="*{id}">
+    <input type="text" th:field="*{description}">
+    <input type="radio" th:field="*{gender}" th:value="1">
+    <label th:for="1" th:text="Male"></label>
+    <input type="radio" th:field="*{gender}" th:value="2">
+    <label th:for="2" th:text="Female"></label>
+    <input type="submit" value="Add Pigeon">
+</form>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Description</th>
+    </tr>
+    <tr th:each="pigeon : ${pigeons}">
+        <td><a th:href="@{/pigeon/{id}(id=${pigeon.id})}" th:text="${pigeon.id}"></a></td>
+        <td th:text="${pigeon.description}"></td>
+    </tr>
+</table>
+</body>
+</html>

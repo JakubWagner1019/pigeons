@@ -1,0 +1,59 @@
+body {
+    background-color: #EEEEEE;
+}
+
+#pigeon_tree {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    min-height: 200px;
+}
+
+#main {
+    margin: 40px auto;
+    max-width: 650px;
+}
+
+#pigeon_tree > * {
+    border-radius: 5px;
+    border: 2px solid #111111;
+    margin: 2px;
+    padding: 0 10px;
+}
+
+#pigeon {
+    grid-row-start: 1;
+    grid-row-end: 5;
+}
+
+#mother {
+    grid-column: 2;
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
+#father {
+    grid-column: 2;
+    grid-row-start: 3;
+    grid-row-end: 5;
+}
+
+#motherMother {
+    grid-column: 3;
+    grid-row: 1;
+}
+
+#motherFather {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+#fatherMother {
+    grid-column: 3;
+    grid-row: 3;
+}
+
+#fatherFather {
+    grid-column: 3;
+    grid-row: 4;
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${pigeon?.id} ?: 'Pigeon Not Found'"></title>
+    <link th:href="@{/css/pigeon.css}" rel="stylesheet">
+</head>
+<body>
+<div id="main">
+    <div id="pigeon_tree">
+        <div id="pigeon">
+            <div th:insert="templates :: pigeonDetail(${pigeon?.id},${pigeon?.description})"></div>
+        </div>
+        <div id="mother">
+            <div th:insert="${mother} ?
+         ~{templates :: pigeonDetail(${mother?.id},${mother?.description})} :
+          ~{templates :: emptyParent(${pigeon?.id},2)}"></div>
+        </div>
+        <div id="father">
+            <div th:insert="${father} ?
+         ~{templates :: pigeonDetail(${father?.id},${father?.description})} :
+          ~{templates :: emptyParent(${pigeon?.id},1)}"></div>
+        </div>
+        <div id="motherMother">
+            <div th:insert="${motherMother} ?
+         ~{templates :: pigeonDetail(${motherMother?.id},${motherMother?.description})} :
+          ~{}"></div>
+        </div>
+        <div id="motherFather">
+            <div th:insert="${motherFather} ?
+         ~{templates :: pigeonDetail(${motherFather?.id},${motherFather?.description})} :
+          ~{}"></div>
+        </div>
+        <div id="fatherMother">
+            <div th:insert="${fatherMother} ?
+         ~{templates :: pigeonDetail(${fatherMother?.id},${fatherMother?.description})} :
+          ~{}"></div>
+        </div>
+        <div id="fatherFather">
+            <div th:insert="${fatherFather} ?
+         ~{templates :: pigeonDetail(${fatherFather?.id},${fatherFather?.description})} :
+          ~{}"></div>
+        </div>
+    </div>
+    <br/>
+    <div>
+        <h1>Children</h1>
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>Description</th>
+            </tr>
+            <tr th:each="child : ${childrenList}">
+                <td><a th:href="@{/pigeon/{id}(id=${child.id})}" th:text="${child.id}"></a></td>
+                <td th:text="${child.description}"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

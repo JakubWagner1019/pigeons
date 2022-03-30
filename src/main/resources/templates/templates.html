@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<body>
+
+<div th:fragment="pigeonDetail(id, description)">
+    <a th:href="@{/pigeon/{id}(id=${id})}" th:text="${id}"></a>
+    <p th:text="${description}"></p>
+</div>
+
+<div th:fragment="emptyParent(id,gender)">
+    <a th:href="@{/pigeon/{id}/createParent(id=${id},gender=${gender})}" th:text="${'Add '+(gender==1?'father':'mother')}"></a>
+</div>
+
+</body>
+
+</html>
