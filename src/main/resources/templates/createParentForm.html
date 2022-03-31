@@ -2,16 +2,19 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${'Creating' + (pigeonDto.gender==1 ?'father':'mother') + 'for' + childId}"></title>
+    <title th:text="${'Creating' + (pigeonDto.gender==1 ?'father':'mother') + 'for' + childId}">Creating parent</title>
+    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet">
 </head>
 <body>
-<a th:href="@{/pigeon/{id}(id=${childId})}">Go back</a>
-<p th:text="${pigeonDto.gender}"></p>
-<form th:action="@{/pigeon/{childId}/createParent(childId=${childId})}" th:object="${pigeonDto}" method="post">
-    <input type="text" th:field="*{id}">
-    <input type="text" th:field="*{description}">
-    <input type="hidden" th:field="*{gender}">
-    <input type="submit" th:value="${'Creating ' + (pigeonDto.gender==1 ?'father':'mother') + ' for ' + childId}">
-</form>
+<div id="main">
+    <a th:href="@{/pigeon/{id}(id=${childId})}">Go back</a>
+    <p th:text="${pigeonDto.gender}"></p>
+    <form th:action="@{/pigeon/{childId}/createParent(childId=${childId})}" th:object="${pigeonDto}" method="post">
+        <input type="text" th:field="*{id}">
+        <input type="text" th:field="*{description}">
+        <input type="hidden" th:field="*{gender}">
+        <input type="submit" value="Submit" th:value="${'Creating ' + (pigeonDto.gender==1 ?'father':'mother') + ' for ' + childId}">
+    </form>
+</div>
 </body>
 </html>

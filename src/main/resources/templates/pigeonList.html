@@ -3,26 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Pigeon List</title>
+    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet">
 </head>
 <body>
-<form th:action="@{/pigeon}" th:object="${pigeonDto}" method="post">
-    <input type="text" th:field="*{id}">
-    <input type="text" th:field="*{description}">
-    <input type="radio" th:field="*{gender}" th:value="1">
-    <label th:for="1" th:text="Male"></label>
-    <input type="radio" th:field="*{gender}" th:value="2">
-    <label th:for="2" th:text="Female"></label>
-    <input type="submit" value="Add Pigeon">
-</form>
-<table>
-    <tr>
-        <th>Id</th>
-        <th>Description</th>
-    </tr>
-    <tr th:each="pigeon : ${pigeons}">
-        <td><a th:href="@{/pigeon/{id}(id=${pigeon.id})}" th:text="${pigeon.id}"></a></td>
-        <td th:text="${pigeon.description}"></td>
-    </tr>
-</table>
+<div id="main">
+    <form th:action="@{/pigeon}" th:object="${pigeonDto}" method="post">
+        <input type="text" th:field="*{id}">
+        <input type="text" th:field="*{description}">
+        <input type="radio" id="radio_male" name="gender" th:field="*{gender}" th:value="1">
+        <label for="radio_male" th:for="1" th:text="Male">Male</label>
+        <input type="radio" id="radio_female" name="gender" th:field="*{gender}" th:value="2">
+        <label for="radio_female" th:for="2" th:text="Female">Female</label>
+        <input type="submit" value="Add Pigeon">
+    </form>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Description</th>
+        </tr>
+        <tbody th:remove="all-but-first">
+            <tr th:each="pigeon : ${pigeons}">
+                <td><a th:href="@{/pigeon/{id}(id=${pigeon.id})}" th:text="${pigeon.id}"></a></td>
+                <td th:text="${pigeon.description}"></td>
+            </tr>
+            <tr>
+                <td><a>P-123</a></td>
+                <td>Awesome pigeon</td>
+            </tr>
+            <tr>
+                <td><a>P-234</a></td>
+                <td>More awesome pigeon</td>
+            </tr>
+            <tr>
+                <td><a>P-345</a></td>
+                <td>Even more awesome pigeon</td>
+            </tr>
+            <tr>
+                <td><a>P-456</a></td>
+                <td>The most awesome pigeon</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

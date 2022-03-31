@@ -2,43 +2,61 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${pigeon?.id} ?: 'Pigeon Not Found'"></title>
-    <link th:href="@{/css/pigeon.css}" rel="stylesheet">
+    <title th:text="${pigeon?.id} ?: 'Pigeon Not Found'">Demo pigeon</title>
+    <link href="../static/css/main.css" th:href="@{/css/main.css}" rel="stylesheet">
 </head>
 <body>
 <div id="main">
     <a th:href="@{/pigeon}">Go back</a>
     <div id="pigeon_tree">
         <div id="pigeon">
-            <div th:insert="templates :: pigeonDetail(${pigeon?.id},${pigeon?.description})"></div>
+            <div th:replace="templates :: pigeonDetail(${pigeon?.id},${pigeon?.description})">
+                <a>Demo pigeon </a>
+                <p>There is no better pigeon</p>
+            </div>
         </div>
         <div id="mother">
-            <div th:insert="${mother} ?
+            <div th:replace="${mother} ?
          ~{templates :: pigeonDetail(${mother?.id},${mother?.description})} :
-          ~{templates :: emptyParent(${pigeon?.id},2)}"></div>
+          ~{templates :: emptyParent(${pigeon?.id},2)}">
+                <a>PL-003</a>
+                <p>Mother of the absolutely best pigeon</p>
+            </div>
         </div>
         <div id="father">
-            <div th:insert="${father} ?
+            <div th:replace="${father} ?
          ~{templates :: pigeonDetail(${father?.id},${father?.description})} :
-          ~{templates :: emptyParent(${pigeon?.id},1)}"></div>
+          ~{templates :: emptyParent(${pigeon?.id},1)}">
+                <a>PL-010</a>
+                <p>Father of an insanely good pigeon</p>
+            </div>
         </div>
         <div id="motherMother">
-            <div th:insert="${motherMother} ?
+            <div th:replace="${motherMother} ?
          ~{templates :: pigeonDetail(${motherMother?.id},${motherMother?.description})} :
-          ~{}"></div>
+          ~{}">
+                <a>PL-001</a>
+                <p>Oldest living pigeon in the world</p>
+            </div>
         </div>
         <div id="motherFather">
-            <div th:insert="${motherFather} ?
+            <div th:replace="${motherFather} ?
          ~{templates :: pigeonDetail(${motherFather?.id},${motherFather?.description})} :
-          ~{}"></div>
+          ~{}">
+                <a>PL-002</a>
+                <p>Biggest pigeon in the world</p>
+            </div>
         </div>
         <div id="fatherMother">
-            <div th:insert="${fatherMother} ?
+            <div th:replace="${fatherMother} ?
          ~{templates :: pigeonDetail(${fatherMother?.id},${fatherMother?.description})} :
-          ~{}"></div>
+          ~{}">
+                <a>PL-003</a>
+                <p>Smartest pigeon in the world</p>
+            </div>
         </div>
         <div id="fatherFather">
-            <div th:insert="${fatherFather} ?
+            <div th:replace="${fatherFather} ?
          ~{templates :: pigeonDetail(${fatherFather?.id},${fatherFather?.description})} :
           ~{}"></div>
         </div>
@@ -51,10 +69,20 @@
                 <th>Id</th>
                 <th>Description</th>
             </tr>
-            <tr th:each="child : ${childrenList}">
-                <td><a th:href="@{/pigeon/{id}(id=${child.id})}" th:text="${child.id}"></a></td>
-                <td th:text="${child.description}"></td>
-            </tr>
+            <tbody th:remove="all-but-first">
+                <tr th:each="child : ${childrenList}">
+                    <td><a th:href="@{/pigeon/{id}(id=${child.id})}" th:text="${child.id}"></a></td>
+                    <td th:text="${child.description}"></td>
+                </tr>
+                <tr>
+                    <td>PL-123</td>
+                    <td>Super male pigeon</td>
+                </tr>
+                <tr>
+                    <td>PL-234</td>
+                    <td>Super female pigeon</td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </div>
