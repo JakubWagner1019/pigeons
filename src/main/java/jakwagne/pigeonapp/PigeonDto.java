@@ -3,8 +3,8 @@ package jakwagne.pigeonapp;
 public record PigeonDto(String id,
                         String description,
                         Integer gender) {
-    public PigeonDao toDao() {
-        return new PigeonDao(
+    public Pigeon toPigeon() {
+        return new Pigeon(
                 this.id,
                 this.description,
                 this.gender,

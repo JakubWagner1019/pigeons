@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import java.util.Objects;
 
 @Entity
-public class PigeonDao {
+public class Pigeon {
 
     @Column(length = 30)
     private String id;
@@ -21,10 +21,10 @@ public class PigeonDao {
     @Column(length = 30)
     private String fatherId;
 
-    public PigeonDao() {
+    public Pigeon() {
     }
 
-    public PigeonDao(String id, String description, int gender, String motherId, String fatherId) {
+    public Pigeon(String id, String description, int gender, String motherId, String fatherId) {
         this.id = id;
         this.description = description;
         this.gender = gender;
@@ -70,7 +70,7 @@ public class PigeonDao {
     public boolean equals(Object obj) {
         if (obj == this) return true;
         if (obj == null || obj.getClass() != this.getClass()) return false;
-        var that = (PigeonDao) obj;
+        var that = (Pigeon) obj;
         return Objects.equals(this.id, that.id) &&
                 Objects.equals(this.description, that.description) &&
                 Objects.equals(this.motherId, that.motherId) &&

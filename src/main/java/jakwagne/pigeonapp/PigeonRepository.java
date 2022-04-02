@@ -6,8 +6,8 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface PigeonRepository extends CrudRepository<PigeonDao, String> {
+public interface PigeonRepository extends CrudRepository<Pigeon, String> {
 
-    @Query(value = "SELECT pigeon FROM PigeonDao pigeon WHERE pigeon.motherId = :parentId OR pigeon.fatherId = :parentId")
-    List<PigeonDao> findPigeonDaosByParentId(@Param("parentId") String parentId);
+    @Query(value = "SELECT pigeon FROM Pigeon pigeon WHERE pigeon.motherId = :parentId OR pigeon.fatherId = :parentId")
+    List<Pigeon> findPigeonsByParentId(@Param("parentId") String parentId);
 }

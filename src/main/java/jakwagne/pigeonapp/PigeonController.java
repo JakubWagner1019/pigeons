@@ -17,7 +17,7 @@ public class PigeonController {
     }
 
     @GetMapping
-    String getPigeonList(Model model){
+    public String getPigeonList(Model model){
         model.addAttribute("pigeonDto", new PigeonDto(null, null, 0));
         model.addAttribute("pigeons",repository.findAll());
         return "pigeonList";
@@ -25,9 +25,9 @@ public class PigeonController {
 
     @GetMapping("/{id}")
     public String getPigeon(@PathVariable String id, Model model){
-        repository.findById(id).ifPresent(pigeonDao -> {
-            model.addAttribute("pigeon", pigeonDao.toDto());
-            Optional.ofNullable(pigeonDao.getMotherId()).flatMap(repository::findById).ifPresent(motherDao -> {
+        repository.findById(id).ifPresent(pigeon -> {
+            model.addAttribute("pigeon", pigeon.toDto());
+            Optional.ofNullable(pigeon.getMotherId()).flatMap(repository::findById).ifPresent(motherDao -> {
                 model.addAttribute("mother", motherDao.toDto());
                 Optional.ofNullable(motherDao.getMotherId()).flatMap(repository::findById).ifPresent(motherMotherDao -> {
                     model.addAttribute("motherMother", motherMotherDao.toDto());
@@ -37,7 +37,7 @@ public class PigeonController {
                 }) ;
             });
 
-            Optional.ofNullable(pigeonDao.getFatherId()).flatMap(repository::findById).ifPresent(fatherDao -> {
+            Optional.ofNullable(pigeon.getFatherId()).flatMap(repository::findById).ifPresent(fatherDao -> {
                 model.addAttribute("father", fatherDao.toDto());
                 Optional.ofNullable(fatherDao.getMotherId()).flatMap(repository::findById).ifPresent(fatherMotherDao -> {
                     model.addAttribute("fatherMother", fatherMotherDao.toDto());
@@ -47,13 +47,13 @@ public class PigeonController {
                 }) ;
             });
         });
-        model.addAttribute("childrenList",repository.findPigeonDaosByParentId(id));
+        model.addAttribute("childrenList",repository.findPigeonsByParentId(id));
         return "pigeon";
     }
 
     @PostMapping
     public String postPigeon(final PigeonDto pigeonDto){
-        repository.save(pigeonDto.toDao());
+        repository.save(pigeonDto.toPigeon());
         return "redirect:/pigeon";
     }
 
@@ -66,19 +66,14 @@ public class PigeonController {
 
     @PostMapping("/{id}/createParent")
     public String postCreateParent(@PathVariable String id,final PigeonDto pigeonDto){
-        PigeonDao child = repository.findById(id).orElseThrow(IllegalArgumentException::new);
+        Pigeon child = repository.findById(id).orElseThrow(IllegalArgumentException::new);
         switch (pigeonDto.gender()) {
-            case 1:
-                child.setFatherId(pigeonDto.id());
-                break;
-            case 2:
-                child.setMotherId(pigeonDto.id());
-                break;
-            default:
-                throw new IllegalArgumentException(String.valueOf(pigeonDto.gender()));
+            case 1 -> child.setFatherId(pigeonDto.id());
+            case 2 -> child.setMotherId(pigeonDto.id());
+            default -> throw new IllegalArgumentException(String.valueOf(pigeonDto.gender()));
         }
         repository.save(child);
-        repository.save(pigeonDto.toDao());
+        repository.save(pigeonDto.toPigeon());
         return "redirect:/pigeon/"+id;
     }
 
